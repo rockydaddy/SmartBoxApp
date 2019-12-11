@@ -1,0 +1,66 @@
+/*
+    Document   : override
+    Created on : <date>
+    Author     : <author>
+    Description:
+        This is where any of your application specific styles should be included
+*/
+
+.rc433-body{
+    background-image: url(images/rc433/rc433bg.png);
+    color:black;
+    padding-top:10px;
+    background-position: center; 
+    background-repeat: no-repeat;
+
+}
+
+.rc433-panel{
+    max-width: 250px;
+    border-radius: 20px;
+    min-height:500px;
+    max-height: 500px;
+}
+.panel-title{
+    font-size: 1.8em;
+}
+.rc433-filmstrip-item{
+    box-sizing: border-box;
+    min-width:220px;
+    /*width: 250px;*/
+    /*height: 59vh;*/
+    min-height: 420px;
+    max-height: 420px;
+    margin: 2px;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+}
+.pagingControlDot, .oj-pagingcontrol-nav-dot-bullet.oj-selected, .oj-pagingcontrol-nav-dot-bullet.oj-hover{
+    /*background-color: rgb(45,156,159);*/
+    background-color: rgb(120,61,59);
+    /*border-color: rgb(120,61,59);*/
+    border-color: rgb(45,156,159);
+    border-width: 2px;
+}
+.buttonGridItem{
+    /*flex: 0 0 50%;*/
+    max-width: 50%;
+    margin: 2px 10px 10px 10px;
+    height:40px;
+    border-radius: 15px;
+    /*    width: 45%;*/
+}
+
+.buttonDefault{
+    background: radial-gradient(darkgrey, grey);
+    border: 1px ridge darkslategrey;
+}
+.buttonOnActive{
+    background: radial-gradient(darkgoldenrod, goldenrod);
+    border: 1px ridge darkslategrey;
+}
+.buttonOffActive{
+    background: radial-gradient(darkred, red);
+    border: 1px ridge darkslategrey;
+}

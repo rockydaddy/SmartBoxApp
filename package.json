@@ -1,0 +1,13 @@
+{
+  "name": "smartboxapp",
+  "version": "1.0.0",
+  "description": "Webaap for Smartbox",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Detlef Müller",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

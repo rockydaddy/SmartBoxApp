@@ -1,0 +1,60 @@
+<!-- F U N K S T E C K D O S E N  -->
+<div id="mainContent" role="main" class="oj-web-applayout-page applayout-body rc433-body vertical-scale">
+    <div id="componentContent" style="width: 1px; min-width: 100%;">
+        <div class="oj-flex oj-sm-flex-items-initial oj-sm-justify-content-center">
+            <div class="oj-flex-item">
+
+
+                <div id="filmStripDiv" class="oj-panel rc433-panel" style="margin: 10px;">
+                    <oj-film-strip id="filmStrip" 
+                                   aria-label="Set of RCs" 
+                                   arrow-visibility="hidden" 
+                                   data-oj-context>
+                        <oj-bind-for-each data="[[system]]">
+                            <template data-oj-as="system">
+                                <div class="oj-panel oj-panel-alt2 rc433-filmstrip-item"
+                                     :style.display="[[getItemInitialDisplay(system.index)]]">
+                                    <!--RC Layout-->
+
+                                    <!--Name-->
+                                    <span class="panel-title"><oj-bind-text value="[[system.data.name]]" ></oj-bind-text></span>
+                                    <hr>
+                                    <!--Button Grid-->
+
+                                    <oj-bind-for-each data="[[system.data.unitCodes]]">
+                                        <template data-oj-as="unit">
+                                            <div class="spacer_above" style="">
+                                                <span><oj-bind-text value="[[unit.data.name]]"></oj-bind-text></span>
+                                                <div class="oj-flex oj-flex-items-pad " >
+                                                    <div :class="[['buttonGridItem oj-flex-item vertikal-zentiert ' + buttonSelector()[unit.index].on()]]"
+                                                        data-bind="click:switchOn.bind($data,system.index,unit.index)"></div>
+
+                                                    <div :class="[['buttonGridItem oj-flex-item vertikal-zentiert ' + buttonSelector()[unit.index].off()]]"
+                                                        data-bind="click:switchOff.bind($data,system.index,unit.index)"></div>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </oj-bind-for-each>
+
+
+                                </div>
+                            </template>
+                        </oj-bind-for-each>
+                    </oj-film-strip>
+                    <div style="text-align: center;">
+                        <div style="display: inline-block;margin-top: 0px;">
+                            <oj-paging-control id="pagingControl" 
+                                               data="[[pagingModel]]"
+                                               page-size="0"
+                                               page-options='{"type": "dots"}'>
+                            </oj-paging-control>
+                        </div>
+                    </div>
+                </div> <!-- end filmStripDiv -->
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

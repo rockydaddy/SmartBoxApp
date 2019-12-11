@@ -1,0 +1,128 @@
+/*
+    Document   : override
+    Created on : <date>
+    Author     : <author>
+    Description:
+        This is where any of your application specific styles should be included
+*/
+/*Global*/
+body, h1, h2, h3, h4{
+    /*color: white;*/
+    font-family: Neue Helvetica W02, Helvetica Neue, Helvetica, Arial, sans-serif;
+    /*margin: 3px;*/
+}
+.header-frame, .footer-frame{
+    background-color: white;
+}
+
+.header-title{
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+.header-no-padding{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.app-icon{
+    background-color: transparent;
+    margin: 0px;
+    padding: 5px;
+    width: 74px;
+    height: 48px;
+}
+.app-icon:before{
+    content: url(images/AppLogo.png);
+    /*width: 48px;*/
+    height: 30px;
+}
+.settings-icon{
+    content: url(images/settings-icon.png);
+    width: 24px;
+    height:24px;
+    background-color: white;
+    border-radius: 5px;
+}
+.sonos-icon{
+    content: url(images/sonos-icon.png);
+    width: 24px;
+    height:24px;
+    background-color: white;
+    border-radius: 5px;    
+}
+.rc433-icon{
+    content: url(images/rc433-icon.png);
+    width: 24px;
+    height:24px;
+    background-color: white;
+        border-radius: 5px;
+
+}
+
+.applayout-body{
+/*    background-image: url(images/sonos/sonosbg.png);
+    color:white;*/
+    background-position: center; 
+    background-repeat: no-repeat;
+    /*min-height: calc(1vh-82px);*/
+    /*height: auto !important;*/
+}
+.no-flex{
+    flex: 0 0 0;   
+}
+
+.vertical-scale{
+    min-height: 84vh;
+    height: auto;
+}
+.menu-off-canvas{
+    width: 50%;
+    max-width: 320px;
+    background-color: darkslategray;
+    color: white;
+}
+
+.oj-contrast-marker .oj-navigationlist-vertical .oj-navigationlist-item.oj-selected{
+    background-color: slategray;
+}
+
+/*.oj-web-applayout-offcanvas-icon:before{
+    content: url(images/navdrawer-icon.png);
+    width: 24px;
+    height: 24px;
+}*/
+.spacer_above{
+    margin-top: 10px;
+}
+.spacer_below{
+    margin-bottom: 10px;
+}
+.spacer_left{
+    margin-left: 10px
+}
+.spacer_right{
+    margin-right: 10px
+}
+.vertikal-zentiert{
+    /* Inhalt vertikal mittig platzieren */
+    display: -webkit-flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.whiteBorder{
+    border: 1px solid white;
+}
+
+.oj-web-applayout-content {
+    padding: 0px;
+    /*margin-top: 5px;*/
+}
+.oj-navigationlist-item.oj-selected{
+    border-bottom-color: slategray;
+}

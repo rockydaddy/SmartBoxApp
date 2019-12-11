@@ -1,0 +1,92 @@
+<!-- S O N O S MODULE  -->
+<div id="mainContent" role="main" class="oj-web-applayout-content sonos-body vertical-scale">
+    <div class="oj-flex oj-sm-flex-items-0 oj-sm-justify-content-center zone-min-width-panel" >
+        <!--Zonen Iterator-->
+        <oj-bind-for-each data="[[sonosZonen]]" as="zones">
+            <template>
+                <!-- Zonenkacheln -->
+                <div :class="[['oj-panel zone-mypanel oj-flex-item ' + getCSSSelector.bind($data,zones.data.coordinator.roomName())()]]">
+                    <!--Zonentitel-->
+                    <span class="zone-title whiteBorder" :id="[['ZonenTitel-' + zones.index]]">
+                      <oj-bind-text  value="[[zones.data.coordinator.roomName()]]"></oj-bind-text>                                        
+                    </span>
+                    <!--/Zonentitel-->
+                    <!--Avatar Aktueller Titel--> 
+                    <div :id="[['avatarContainer-' + zones.index]]" class="spacer_above " >
+                        <oj-avatar :id="[['avatar-' + zones.index]]" 
+                            class="" role="img" size="lg" initials="SO" 
+                            src="[[titleAvatarIcon.bind($data,zones.data.coordinator.state.currentTrack)()]]"
+                            :aria-label="[['Avatar of ' + zones.data.coordinator.roomName()]]" 
+                            data-bind="click: handleOpen.bind($data,zones.data.uuid )">
+                    </oj-avatar>
+                </div>
+                <!--/Avatar Aktueller Titel--> 
+                <!--Slider Container-->
+                <div :id="[['volumeSliderContainer-' + zones.index]]" class="spacer_above volumeSliderContainer whiteBorder vertikal-zentiert" >
+                    <span role="img" class="volumeIcon" ></span><!-- Icon-->
+                    <div class="volumeSlider vertikal-zentiert"> <!-- slider -->
+                        <oj-slider :id="[['slider-id' + zones.index]]" 
+                            value="{{zones.data.coordinator.state.volume}}"  
+                            min="0" 
+                            max="100" 
+                            step="1"
+                            on-value-changed="[[volumeChange.bind($data,zones.index)]]">
+                    </oj-slider>
+                </div>
+                <div class="volumeLevel vertikal-zentiert">
+                    <oj-bind-text  value="{{zones.data.coordinator.state.volume()}}"></oj-bind-text>
+                </div>
+            </div>
+            <!--/Slider Container-->
+            <!--Play/Pause Button-->
+            <div class='spacer_above '>
+                <span  role="img" :class="[[zones.data.coordinator.state.playbackState()]]" 
+                       data-bind="click: togglePlayPause.bind($data,zones.index)">
+                </span>
+            </div>
+            <!--/Play/Pause Button-->
+            <!--Favoriten Dialog-->
+            <div id="dialogWrapper">
+                <oj-dialog style="display:none" 
+                           :id="[[zones.data.uuid]]" 
+                           :dialog-title="[[zones.data.coordinator.roomName()]]" 
+                           modality="modal"
+                           position.my.vertical="top"
+                           position.at.vertical="top"
+                           position.offset.x="0"
+                           position.offset.y="100"
+                           class="senderDialog">
+                    <!--Favoriten Liste-->
+                    <div slot="body" class="senderDialogBody" style="color: black;">
+                        <oj-list-view id="favoritenListe" 
+                                      aria-label="senderliste"  
+                                      data="[[favoritenDP]]" >                                            
+                            <template slot="itemTemplate" data-oj-as="item" >
+                                <div class="vertikal-zentiert" 
+                                     data-bind="click: playFavorite.bind($data,zones.index,item.data.title(),zones.data.uuid)">
+                                    <!--Sender Avatar-->
+                                    <oj-avatar id="av2" class="" role="img" size="xs" initials="" 
+                                               src="[[favoriteAvatarIcon.bind($data,item.data)()]]" 
+                                               :aria-label="[[item.data.title]]">
+                                    </oj-avatar>
+                                    <!--/Sender Avatar-->
+                                    <!--Sender Label-->
+                                    <span class="spacer_left">
+                                        <oj-bind-text value="[[item.data.title]]"></oj-bind-text>
+                                    </span>    
+                                    <!--/Sender Label-->
+                                </div>
+                            </template>
+                        </oj-list-view>
+                    </div>
+                    <!--/Favoriten Liste-->                                    
+                </oj-dialog>
+            </div>
+            <!--/Favoriten Dialog-->
+        </div>
+        <!--/Zonenkacheln-->            
+    </template>
+</oj-bind-for-each>
+<!--/Zonen Iterator-->
+</div> 
+</div> 

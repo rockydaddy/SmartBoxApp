@@ -1,0 +1,198 @@
+/*
+    Document   : override
+    Created on : <date>
+    Author     : <author>
+    Description:
+        This is where any of your application specific styles should be included
+*/
+/*Global*/
+
+.sonos-body{
+    background-image: url(images/sonos/sonosbg.png); 
+    color:white;
+    /*padding-top: 10px;*/
+    background-position: center; 
+    background-repeat: no-repeat;
+}
+.zone-webkit-bug-136041.oj-sm-flex-items-0 .zone-mypanel,
+.zone-webkit-bug-136041.oj-sm-flex-items-1 .zone-mypanel {
+    flex-basis: 350px;
+}
+.zone-mypanel {
+    margin: 5px 5px 5px 5px;
+    background-color: transparent;
+    text-align: center;
+    border-radius: 10px;
+    border-color: darkgray;
+}
+.zone-min-width-panel .zone-mypanel {
+    min-width: 350px;
+}
+.zone-width-panel .zone-mypanel {
+    width: 350px;
+}
+.zone-max-width-panel .zone-mypanel {
+    max-width: 350px;
+}
+.zone-title{
+    background-color: rgba(256,256,256,0.7); /*weiß, 70% transparent*/
+    color: black;
+    padding: 0px 10px 0px 10px;
+    border-radius: 5px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-align: center;
+}
+/*Zonen Selektor : zoneX X= lfd Nummerierung entsprechend der Zonen API elemente*/
+.zone-1{ /*keine Zone erkannt*/
+    background-color: lightslategray;/*grün*/
+    opacity: 0.9;
+
+}
+.zone0{ /*Küche*/
+    /*background-image: url('images/sonos/kueche.jpg');*/
+    opacity: 0.95;
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-color: #393;/*grün*/
+
+}
+.zone1{/*Wohnzimmer*/
+    /*background-image: url('images/sonos/wohnzimmer.jpg');*/
+    opacity: 0.95;
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-color: #312221;/*wenge*/
+
+}
+.zone2{/* noch leer*/
+    /*background-image: url('images/sonos/bad.jpg');*/
+    opacity: 0.95;
+    background-position: center; 
+    background-repeat: no-repeat;
+}
+.zone3{/* noch leer*/
+    /*background-image: url('images/sonos/küche.jpg');*/
+    opacity: 0.95;
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-color: #4bbd3b;/*grün*/
+
+}
+.zone4{/* noch leer*/
+    /*background-image: url('images/sonos/wohnzimmer.jpg');*/
+    opacity: 0.95;
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-color: #312221;/*wenge*/
+
+}
+.zone5{/* noch leer*/
+    /*background-image: url('images/sonos/bad.jpg');*/
+    opacity: 0.95;
+    background-position: center; 
+    background-repeat: no-repeat;
+}
+
+
+.playingTitleBtn:before{
+    content: url(images/sonos/playing.gif);
+    /*    width: 34px;
+        height: 24px;*/
+}
+.loadingTitleBtn:before{
+    content: url(images/sonos/playing.gif);
+    /*    width: 34px;
+        height: 24px;*/
+}
+.loadingTitleBtn:before{
+    content: url(images/sonos/loading.gif);
+    /*    width: 34px;
+        height: 24px;*/
+}
+.stoppedTitleBtn:before{
+    content: url(images/sonos/stopped.png);    
+    /*    width: 34px;
+        height: 24px;*/
+}
+
+.volumeSliderContainer{
+    width: 100%;
+    height: 28px;
+    background-color:  rgba(256,256,256,0.7); /*weiß, 70% transparent*/
+    align-items: center;
+    border-radius: 5px;
+}
+.volumeIcon{
+    content: url(images/sonos/volume.svg);
+    width: 24px;
+    margin-left: 3px; 
+    float: left;
+    padding: 0px 0px 0px 5px;
+}
+.volumeSlider{
+    width: 100%;
+    /*background-color: #DAA520;*/
+    padding: 0px 10px 0px 10px;
+}
+.volumeLevel{
+    float: right;
+    padding: 0px 15px 0px 2px;
+    color:black;
+    font-weight: bold;
+}
+
+.oj-slider-horizontal .oj-slider-thumb{
+    width: 18px;
+    height: 18px;
+    margin-top: -9px;
+    margin-left: -9px;
+    /*background: darkred;*/
+}
+.oj-slider-bar-value{
+    background: darkred;
+}
+.oj-slider-bar{
+    background: white;
+}
+.oj-slider-bar-value.oj-active{
+    background: red;
+}
+
+/*Sender Dialog*/
+.senderDialog{
+    width: 250px;
+    border-radius: 10px;
+    border-color: darkgray;
+
+    /*top: 30px;*/
+}
+.senderDialogBody{
+    padding: 0px;
+}
+.oj-dialog-header, .senderDialogHeader{
+    padding: 5px 10px 5px 10px;
+    background-color: black;
+    color: white;
+    /*margin: 0px;*/
+}
+.senderListItem{
+    padding: 5px 10px 5px 10px;
+    background-color: white ;
+
+}
+.favoriteAvatar {
+
+    border-radius: 50%;
+    background-size: 35px 35px;
+    width: 35px;
+    height: 35px;
+    display: inline-block;
+
+}
+
+.oj-listview-item{/*Senderliste*/
+    padding: 5px 10px 5px 10px;
+    /*background-color: white ;*/
+
+}
