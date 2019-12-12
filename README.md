@@ -15,16 +15,16 @@ SmartBoxApp requires [Node.js](https://nodejs.org/) v4+ to run.
 $ git clone https://github.com/rockydaddy/SmartBoxApp.git
 $ cd SmartBoxApp/static/data
 ```
-  - Update the Sonos configuration to point to the API Server addresses (use a text editor of your choice, here it's vi)
+  - Update the Sonos configuration to point to the API Server addresses (use a text editor of your choice, here it's `vi`)
 ```sh
 $ vi sonosConfig.js
 ```
   - update `var basisUrl = "http://192.168.0.6:5005/";` pointing to your Sonos REST API backend
-  - Update the RC433 configuration to point to the API Server addresses (use a text editor of your choice, here it's vi)
+  - Update the RC433 configuration to point to the API Server addresses (use a text editor of your choice, here it's `vi`)
 ```sh
 $ vi rc433Config.js
 ```
-  - update `var basisUrl = "http://192.168.0.6:5005/";` pointing to your RC433 REST API backend
+  - update `var basisUrl = "http://192.168.0.6:3000/";` pointing to your RC433 REST API backend
   - Navigate back to the app root directory and install all required node modules
 ```sh
 $ cd ../../
