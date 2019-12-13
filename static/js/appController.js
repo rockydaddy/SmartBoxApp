@@ -10,8 +10,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'ojs/ojmodule-el
     'ojs/ojoffcanvas'],
         function (oj, ko, moduleUtils) {
             function ControllerViewModel() {
-                var self = this;
-
+                var self = this;                
                 // Media queries for repsonsive layouts
                 var smQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_ONLY);
                 self.smScreen = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(smQuery);

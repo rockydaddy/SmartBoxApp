@@ -1,0 +1,68 @@
+{
+   "sonos":{
+      "host":"http://192.168.0.6:5005",
+      "zonen":[
+         {
+            "name":"Küche"
+         },
+         {
+            "name":"Wohnzimmer"
+         },
+         {
+            "name":"Bad"
+         },
+         {
+            "name":""
+         }
+      ]
+   },
+   "rc433":{
+      "host":"http://192.168.0.6:3000",
+      "systemDef":[
+         {
+            "systemCode":"11111",
+            "name":"System Code 11111",
+            "unitCodes":[
+               {
+                  "unitCode":1,
+                  "name":"Unit 1"
+               },
+               {
+                  "unitCode":2,
+                  "name":"Unit 2"
+               },
+               {
+                  "unitCode":3,
+                  "name":"Unit 3"
+               },
+               {
+                  "unitCode":4,
+                  "name":"Unit 4"
+               }
+            ]
+         },
+         {
+            "systemCode":"01111" ,
+            "name":"System Code 01111",
+            "unitCodes":[
+               {
+                  "unitCode":1,
+                  "name":"Unit 1"
+               },
+               {
+                  "unitCode":2,
+                  "name":"Unit 2"
+               },
+               {
+                  "unitCode":3,
+                  "name":"Unit 3"
+               },
+               {
+                  "unitCode":4,
+                  "name":"Unit 4"
+               }
+            ]
+         }
+      ]
+   }
+}

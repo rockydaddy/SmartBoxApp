@@ -6,25 +6,51 @@
 /*
  * Your dashboard ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', '../../data/sonosConfig', 'ojs/ojarraydataprovider', 'ojs/ojknockout', 'jquery',
+define(['ojs/ojcore', 'knockout', 'text!../../data/config.json',  'ojs/ojarraydataprovider', 'ojs/ojknockout', 'jquery',
     'ojs/ojavatar', 'ojs/ojslider', 'ojs/ojdialog', 'ojs/ojlistview'],
-        function (oj, ko) {
+        function (oj, ko, cfg) {
 
             function SonosViewModel() {
                 var self = this;
                 // Below are a set of the ViewModel methods invoked by the oj-module component.
                 // Please reference the oj-module jsDoc for additional information.
-
 //----------------- I N I T ----------------------------------------------------
+// Statische Hilfsvariablen
+                var playStatusButton = { // CSS Selektor
+                                        "stop": "stoppedTitleBtn",
+                                        "play": "playingTitleBtn",
+                                        "loading": "loadingTitleBtn"
+                                    };
+                var avatars = {
+                    "titelAvatar": {
+                        "TV": "css/images/sonos/tv_avatar.png",
+                        "Vinyl": "css/images/sonos/vinyl_avatar.png",
+                        "Sonstiges": "css/images/sonos/sonstiges_avatar.png"
+                    },
+                    "favoritenAvatar": {
+                        "Vinyl": "css/images/sonos/vinyl_avatar.png",
+                        "Sonstiges": "css/images/sonos/sonstiges_avatar.png"
+                    }
+                };
+//Lese Basiskonfiguration
+                self.config = JSON.parse(cfg).sonos;//Auslesen aus config.json
+                self.zonenDef = self.config.zonen; //Array für die Definition des CSS Selektors auf Basis des Zonennamens, statt Index des Zonenarrays (kann sich ändern)
+                //Binding Objekte definieren
                 self.sonosZonen = ko.observableArray().extend({deferred: true});
                 self.sonosFavoriten = ko.observableArray().extend({deferred: true});
                 self.apiResponse = ko.observable().extend({deferred: true});
                 self.favoritenDP = ko.observable().extend({deferred: true});
-                
-//----------------- S o n o s   API C a l l s ----------------------------------
 
+//----------------- S o n o s   API C a l l s ----------------------------------
+// Urls aus Basiskonfiguration zusammenstellen
+                self.zonenAPI = self.config.host + "/zones";
+                self.favoritenAPI = self.config.host + "/favorites/detailed";
+                self.wechsleSender = function (raum, sender) {return encodeURI(self.config.host + '/' + raum + '/favorite/' + sender);};
+                self.startStop = function (raum) {return encodeURI(self.config.host + '/' + raum + '/playpause');};
+                self.setVolume = function (raum, level) {return encodeURI(self.config.host + '/' + raum + '/volume/' + level);};
 // Allgemeine JQuery Function
                 self.getJSONData = function (url, jsonData) {
+//                    console.log(url);
                     $.getJSON(url).done(function (response) {
                         jsonData(response);
 //                        console.log(response);
@@ -32,42 +58,41 @@ define(['ojs/ojcore', 'knockout', '../../data/sonosConfig', 'ojs/ojarraydataprov
 //                    console.log(jsonData());
                 };
 
-//Zonen Binding beim Laden
-                self.getJSONData(zonenAPI, self.sonosZonen);// Hole Daten
-//Favoriten Binding bveim Laden
-                self.getJSONData(favoritenAPI, self.sonosFavoriten);// Hole Daten
-
+//Zonen Binding beim Laden der Seite
+                self.getJSONData(self.zonenAPI, self.sonosZonen);// Hole Daten
+//Favoriten Binding beim Laden der Seite
+                self.getJSONData(self.favoritenAPI, self.sonosFavoriten);// Hole Daten
 //Toggle PlayPause Action bei Click
                 self.togglePlayPause = function (idx) {
                     // Start / Stop API Call
-                    self.getJSONData(startStop(self.sonosZonen()[idx].coordinator.roomName()), self.apiResponse);
-                    //play Status Icon auf "Loading"
+                    self.getJSONData(self.startStop(self.sonosZonen()[idx].coordinator.roomName()), self.apiResponse);
+                    //play Status Icon auf "Loading", wenn neue Daten vorliegen erfolgt Update des Status Buttons durch Observable
                     self.sonosZonen()[idx].coordinator.state.playbackState(playStatusButton.loading);
                     //play Status Icon auf "Loading" solange auf neue Daten gewartet wird
                     setTimeout(function () {
-                        self.getJSONData(zonenAPI, self.sonosZonen);
+                        self.getJSONData(self.zonenAPI, self.sonosZonen);
                     }, 4000);// Gib der Sonos etwas Zeit - 4sek ausprobiert, Starten einiger Radiosender dauert etwas länger)
                 };
 //Spiele Favorit
                 self.playFavorite = function (idx, sender, dialogId) {
-                    self.getJSONData(wechsleSender(self.sonosZonen()[idx].coordinator.roomName(), sender), self.apiResponse);
+                    self.getJSONData(self.wechsleSender(self.sonosZonen()[idx].coordinator.roomName(), sender), self.apiResponse);
 
                     document.querySelector("#" + dialogId).close();
                     //play Status Icon auf "Loading" solange auf neue Daten gewartet wird
                     self.sonosZonen()[idx].coordinator.state.playbackState(playStatusButton.loading);
                     // aktuelle Zonen Daten holen
                     setTimeout(function () {
-                        self.getJSONData(zonenAPI, self.sonosZonen);
+                        self.getJSONData(self.zonenAPI, self.sonosZonen);
                     }, 4000);//Warte 4 Sekunden, da einige Radiosender etwas länger brauchen
 
                 };
 
 //Setze Lautstärke wenn Observable in der UI geändert wird -> durch Slider
                 self.volumeChange = function (idx) {
-                    self.getJSONData(setVolume(self.sonosZonen()[idx].coordinator.roomName(), self.sonosZonen()[idx].coordinator.state.volume()), self.apiResponse);
+                    self.getJSONData(self.setVolume(self.sonosZonen()[idx].coordinator.roomName(), self.sonosZonen()[idx].coordinator.state.volume()), self.apiResponse);
                     // jetzt aktuelle Zonen Daten holen
 //                    setTimeout(function(){
-//                        self.getJSONData(zonenAPI, self.sonosZonen);
+//                        self.getJSONData(self.zonenAPI, self.sonosZonen);
 //                    },100); // nur kurz warten, bis Sonos reagiert hat
                 };
 
@@ -82,7 +107,10 @@ define(['ojs/ojcore', 'knockout', '../../data/sonosConfig', 'ojs/ojarraydataprov
                 };
 //CSS Selektor für Zone
                 self.getCSSSelector = function (zonename) {
-                    return 'zone' + sonosZonen.indexOf(zonename);
+                    var index = self.zonenDef.findIndex(function (item, i) {
+                        return item.name === zonename;
+                    });
+                    return 'zone' + index;
                 };
 //Avatar Icon, wenn Zonen API nichts ordentliches liefert 
                 self.titleAvatarIcon = function (curTrack) {
@@ -112,6 +140,7 @@ define(['ojs/ojcore', 'knockout', '../../data/sonosConfig', 'ojs/ojarraydataprov
                             }
                     }
 //                    }
+//                    console.log(src);
                     return src;
                 };
 //favoriten Avatar Icon für Schallplatten bzw. sonstigesa
@@ -131,8 +160,7 @@ define(['ojs/ojcore', 'knockout', '../../data/sonosConfig', 'ojs/ojarraydataprov
                         default:
 //                            return curFav.albumArtUri();
                             return curFav.albumArtUri;
-                    }
-                };
+                    }};
 //Korektur des Zonen Arrays mit Observable Elementen, wenn ZonenDaten geladen (jQuery Asynch)
                 self.sonosZonen.subscribe(function () {
                     self.sonosZonen().forEach(function (item, index) {
@@ -140,13 +168,11 @@ define(['ojs/ojcore', 'knockout', '../../data/sonosConfig', 'ojs/ojarraydataprov
                         self.sonosZonen()[index].coordinator.state.volume = ko.observable(self.sonosZonen()[index].coordinator.state.volume);
 //                        self.sonosZonen()[index].coordinator.state.currentTrack = ko.observable(self.sonosZonen()[index].coordinator.state.currentTrack);
                         self.sonosZonen()[index].coordinator.state.playbackState = ko.observable(self.sonosZonen()[index].coordinator.state.playbackState);
-
                         if (self.sonosZonen()[index].coordinator.state.playbackState().toLowerCase() === 'playing') {
                             self.sonosZonen()[index].coordinator.state.playbackState(playStatusButton.play);
                         } else {
                             self.sonosZonen()[index].coordinator.state.playbackState(playStatusButton.stop);
-                        }
-                        ;
+                        };
 //                            console.log(self.sonosZonen()[index].coordinator.state.playbackState());
                     });
                 });
