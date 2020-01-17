@@ -23,7 +23,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'ojs/ojmodule-el
                     'sonos': {label: 'Sonos', isDefault: true},
                     'rc433': {label: 'Licht'},
 //         'customers': {label: 'Customers'},
-                    'settings': {label: 'Einstellungen'}
+                    'setup': {label: 'Einstellungen'}
                 });
                 oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
 
@@ -54,8 +54,8 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'ojs/ojmodule-el
                         iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 rc433-icon'},
 //      {name: 'Customers', id: 'customers',
 //       iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-people-icon-24'},
-                    {name: 'Einstellungen', id: 'settings',
-                        iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 settings-icon'}
+                    {name: 'Einstellungen', id: 'setup',
+                        iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 setup-icon'}
                 ];
                 self.navDataSource = new oj.ArrayTableDataSource(navData, {idAttribute: 'id'});
 
@@ -72,7 +72,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'ojs/ojmodule-el
                 // Called by navigation drawer toggle button and after selection of nav drawer item
                 self.toggleDrawer = function () {
                     return oj.OffcanvasUtils.toggle(self.drawerParams);
-                }
+                };
                 // Add a close listener so we can move focus back to the toggle button when the drawer closes
                 $("#navDrawer").on("ojclose", function () {
                     $('#drawerToggleButton').focus();
@@ -82,7 +82,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'ojs/ojmodule-el
                 // Application Name used in Branding Area
                 self.appName = ko.observable("SmartBox");
                 // User Info used in Global Navigation area
-                self.userLogin = ko.observable("john.hancock@oracle.com");
+//                self.userLogin = ko.observable("john.hancock@oracle.com");
 
                 // Footer
                 function footerLink(name, id, linkTarget) {

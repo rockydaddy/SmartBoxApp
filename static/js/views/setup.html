@@ -1,0 +1,60 @@
+<!-- S E T U P   -->
+<div id="mainContent" role="main" class="oj-web-applayout-content setup-body vertical-scale">
+    <div class="oj-flex oj-sm-flex-items-0 oj-sm-justify-content-center setup-min-width-panel" >
+        <div class="oj-flex oj-sm-flex-items-0 oj-sm-justify-content-center setup-min-width-panel" >
+            <span class="setup-title whiteBorder" id="sonos-title" >Schalter hier</span>
+        </div>
+        <div class="oj-flex oj-sm-flex-items-0 oj-sm-justify-content-center setup-min-width-panel" >
+            <div class="oj-panel setup-mypanel oj-flex-item">            
+                <span class="setup-title whiteBorder" id="sonos-title" ><oj-bind-text value="{{configDataBind().sonos.label}}" ></oj-bind-text></span>
+                <oj-label-value label-edge="start" label-width="100px" >                        
+                    <oj-label slot="label" for="sHost-input" >REST Server</oj-label>
+                    <oj-input-text id="sHost-input" slot="value" value="{{configDataBind().sonos.host}}"></oj-input-text>
+                </oj-label-value>
+                <oj-bind-for-each data="[[configDataBind().sonos.zonen]]" as="zones">
+                    <template>
+                        <oj-label-value label-edge="start" label-width="100px" >    
+                            <oj-label slot="label" :for="[['zone-input' + zones.index]]" >
+                                      <oj-bind-text  value="[['Zone ' + zones.index]]"></oj-bind-text>
+                            </oj-label>
+                            <oj-input-text :id="[['zone-input' + zones.index]]" slot="value" value="[[zones.data.name]]"></oj-input-text>
+                        </oj-label-value>
+                    </template>
+                </oj-bind-for-each>
+            </div>
+            <div class="oj-panel setup-mypanel oj-flex-item">            
+                <span class="setup-title whiteBorder" id="rc433-title" ><oj-bind-text value="{{configDataBind().rc433.label}}" ></oj-bind-text></span>
+                <oj-label-value label-edge="start" label-width="100px" >                        
+                    <oj-label slot="label" for="rHost-input" >REST Server</oj-label>
+                    <oj-input-text id="rHost-input" slot="value" value="{{configDataBind().rc433.host}}"></oj-input-text>
+                </oj-label-value>
+                <!--            Schleife über System-->
+                <oj-bind-for-each data="[[configDataBind().rc433.systems]]" as="systems">
+                    <template>
+                        <div :class="[['system-tile' + systems.index]]">
+                            <oj-label-value label-edge="start" label-width="100px" >    
+                                <oj-label slot="label" :for="[['system-input' + systems.index]]" >
+                                          <oj-bind-text  value="[['System  ' + systems.index]]"></oj-bind-text>
+                                </oj-label>
+                                <oj-input-text :id="[['system-input' + systems.index]]" slot="value" value="[[systems.data.name]]"></oj-input-text>
+                            </oj-label-value>
+                            <!--Schleife über Units pro System-->
+                            <oj-bind-for-each data="[[systems.data.units]]" as="units">
+                                <template>
+                                    <oj-label-value label-edge="start" label-width="100px" >    
+                                        <oj-label slot="label" :for="[['unit-input' + systems.index + '-' + units.index]]" >
+                                                  <oj-bind-text  value="[['Unit  ' + units.index]]"></oj-bind-text>
+                                        </oj-label>
+                                        <oj-input-text :id="[['unit-input' + systems.index + '-' + units.index]]" slot="value" value="[[units.data.name]]"></oj-input-text>
+                                    </oj-label-value>
+                                </template>
+                            </oj-bind-for-each>
+                            <!--/Schleife über Units pro System-->
+                        </div>
+                    </template>
+                </oj-bind-for-each>
+                <!--Schleife über System-->
+            </div>
+        </div>
+    </div>
+</div>

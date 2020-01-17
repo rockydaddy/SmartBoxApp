@@ -1,6 +1,6 @@
 {
     "name": "Smart Controller",
-    "short_name": "SmartBox",
+    "short_name": "Sonos",
     "background_color": "transparent",
     "scope": "/",
     "display": "standalone",

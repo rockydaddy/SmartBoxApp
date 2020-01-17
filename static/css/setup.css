@@ -1,0 +1,52 @@
+/*
+    Document   : override
+    Created on : <date>
+    Author     : <author>
+    Description:
+        This is where any of your application specific styles should be included
+*/
+/*Global*/
+
+.setup-body{
+    background-image: url(images/setup/setupbg.png); 
+    color:white;
+    /*padding-top: 10px;*/
+    background-position: center; 
+    background-repeat: no-repeat;
+}
+
+.setup-mypanel {
+    margin: 5px 5px 5px 5px;
+    background-color: transparent;
+    text-align: center;
+    border-radius: 10px;
+    border-color: darkgray;
+}
+.setup-min-width-panel .setup-mypanel {
+    min-width: 350px;
+}
+.setup-width-panel .setup-mypanel {
+    width: 350px;
+}
+.setup-title{
+    background-color: rgba(256,256,256,0.7); /*weiß, 70% transparent*/
+    color: black;
+    padding: 0px 10px 0px 10px;
+    border-radius: 5px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.system-tile0{
+    background-color: lightgoldenrodyellow;
+    padding: 3px 3px 0px 0px;
+}
+.system-tile1{
+    background-color: lightcyan;
+    padding: 3px 3px 0px 0px;
+}
+.system-tile3{
+    background-color: lightgrey;
+    padding: 3px 3px 0px 0px;
+}

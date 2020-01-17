@@ -29,7 +29,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojcontext', 'text!../../data/config.json'
 
                 //Lese Basiskonfiguration
                 self.config = JSON.parse(cfg).rc433;//Auslesen aus config.json
-                self.systemDef = self.config.systemDef; //Array für die Definition des CSS Selektors auf Basis des Zonennamens, statt Index des Zonenarrays (kann sich ändern)
+                self.systemDef = self.config.systems; //Array für die Definition des CSS Selektors auf Basis des Zonennamens, statt Index des Zonenarrays (kann sich ändern)
                 //Binding Objekte definieren
                 self.buttonSelectors = {"default":"buttonDefault","onActive": "buttonOnActive","offActive":"buttonOffActive"};
                 self.buttonSelector = ko.observableArray();
@@ -45,7 +45,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojcontext', 'text!../../data/config.json'
 //                    {name: 'Fernbedienung 2'}
 //                ];
 
-                self.system = ko.observableArray(self.systemDef);
+                self.system = ko.observableArray(self.config.systems);
 //                console.log(self.system());
 
 //----------------- A K T I O N E N --------------------------------------------
